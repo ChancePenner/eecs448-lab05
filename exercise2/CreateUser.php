@@ -3,7 +3,6 @@
 <?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-echo "not broken yet";
 
 $id = $_POST["username"];
 
@@ -18,7 +17,7 @@ if ($mysqli->connect_errno) {
 $query = "SELECT Users, user_id FROM Users";
 
 if ($result = $mysqli->query($query)) {
-
+  echo "IF STATEMENT\n";
     /* fetch associative array */
     while ($row = $result->fetch_assoc()) {
         printf ("%s (%s)\n", $row["user_id"]);
@@ -30,9 +29,16 @@ if ($result = $mysqli->query($query)) {
 }
 else
 {
-  $mysqli-> "INSERT INTO Users('user_id') VALUES ('$id')";
-  echo $id;
-  echo "\n";
+  $sql= "INSERT INTO Users(user_id) VALUES ('$id')";
+  if($id != "")
+  {
+    $mysqli->query($sql);
+    echo "user " . $id . " was successfully created!\n";
+  }
+  else
+  {
+    echo "Invalid username. Please try again!\n";
+  }
 }
 
 $mysqli->close();

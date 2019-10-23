@@ -7,20 +7,19 @@
 	<head>
 
 		<php include 'CreateUser.php';?>
-			
+
 		<title> Welcome </title>
 
 	</head>
 
 	<body>
 
-					<form name = "entireForm" action="CreateUser.php"  onsubmit="checkInput()" method="post">
+					<form action="CreateUser.php" method="post">
 
-					Username:  <input type = "text" class = "username" id = "username"><br>
+					Username:  <input type = "text" name = "username"><br>
 
-				      <input type="submit" value = "Submit">
+				      <input type="submit">
 
-					<button type = "button" onclick="clearInput();">Clear</button>
 						</form>
 
 	</body>
