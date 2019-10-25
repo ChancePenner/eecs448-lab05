@@ -1,0 +1,26 @@
+<!-- CreatePosts.html -->
+<!-- CreateUser.html -->
+
+<html>
+	<head>
+
+		<php include 'CreateUser.php';?>
+
+		<title> Write a Post </title>
+
+	</head>
+
+	<body>
+
+					<form action="CreatePosts.php" method="post">
+
+					Username:<br>  <input type = "text" name = "username"><br>
+          Post: <br>
+          <textarea name = "post" required="required" rows="10" cols="50"></textarea>
+          <br><br>
+				      <input type="submit" value="Create Post">
+
+						</form>
+
+	</body>
+</html>
