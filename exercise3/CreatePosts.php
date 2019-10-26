@@ -1,5 +1,4 @@
 <!-- CreatePosts.php -->
-<!-- CreateUser.php -->
 
 <?php
 error_reporting(E_ALL);
@@ -33,6 +32,7 @@ if ($mysqli->connect_errno) {
 }
 
 $query = "SELECT Users, user_id FROM Users";
+$posts_id = ("SELECT Users, posts_id FROM Users");
 
 
 if ($result = $mysqli->query($query)) {
@@ -48,6 +48,8 @@ if ($result = $mysqli->query($query)) {
 else
 {
   $sql= "INSERT INTO Posts(content) VALUES ('$post')";
+  // $setkey = "INSERT INTO Posts(author_id) VALUES ('$id')";
+  $setkey = "UPDATE Posts SET author_id='$id' WHERE posts_id=''";
 
   if($id == "")
   {
@@ -56,6 +58,8 @@ else
   else if($usernameFound)
   {
     $mysqli->query($sql);
+    $mysqli->query($setkey);
+
     echo "Post for user " . $id . " has been created!\n";
   }
   else
