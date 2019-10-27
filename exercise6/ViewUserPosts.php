@@ -18,7 +18,7 @@ $sql = "SELECT content FROM Posts WHERE author_id='$id'";
 $result = $mysqli->query($sql);
 
 if ($result->num_rows > 0) {
-  echo "<table width=10% border =\'1\'>";
+  echo "<table width=30% border =\'1\'>";
   echo "<th>" . $id . "'s Posts</th>";
     /* fetch associative array */
     while ($row = $result->fetch_assoc()) {
