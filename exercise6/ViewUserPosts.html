@@ -1,19 +1,55 @@
 <!-- ViewUserPosts.html -->
 <html>
-<body>
   <head>
     <php include 'ViewUserPosts.php';?>
 
     </head>
     <title>ViewUserPosts</title>
 
-<select>
+<body>
 
-  
+  <h1>Select a user</h1>
+  <form action="ViewUserPosts.php" method="post">
+
+  <?php
+  $mysqli = new mysqli("mysql.eecs.ku.edu", "chancepenner2016", "eeRahL7v", "chancepenner2016");
+
+  /* check connection */
+  if ($mysqli->connect_errno) {
+      printf("Connect failed: %s\n", $mysqli->connect_error);
+      exit();
+  }
 
 
+  error_reporting(E_ALL);
+  ini_set("display_errors", 1);
 
-</select>
+  $sql = "SELECT user_id FROM Users";
+  $result = $mysqli->query($sql);
+
+
+  echo "<select name='username'>";
+
+  if ($result->num_rows > 0) {
+      /* fetch associative array */
+
+
+      while ($row = $result->fetch_assoc()) {
+
+        echo "<option value=" . $row["user_id"] . ">" . $row["user_id"] . "</option>";
+      }
+      echo "</select>";
+
+      /* free result set */
+      $result->free();
+  }
+  ?>
+
+  <input type="submit" value="View Posts">
+
+    </form>
+
+<!-- </select> -->
 
 </body>
 </html>

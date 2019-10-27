@@ -1,1 +1,71 @@
 <!-- DeletePost.html -->
+
+<html>
+  <head>
+    <php include 'DeletePost.php';?>
+
+    </head>
+    <title>ViewUserPosts</title>
+
+<body>
+
+  <h1>Select Posts to Delete</h1>
+  <form action="DeletePost.php" method="post">
+
+  <?php
+  $mysqli = new mysqli("mysql.eecs.ku.edu", "chancepenner2016", "eeRahL7v", "chancepenner2016");
+
+  /* check connection */
+  if ($mysqli->connect_errno) {
+      printf("Connect failed: %s\n", $mysqli->connect_error);
+      exit();
+  }
+
+
+  error_reporting(E_ALL);
+  ini_set("display_errors", 1);
+
+  $sql = "SELECT content, author_id, posts_id FROM Posts";
+  $result = $mysqli->query($sql);
+
+
+
+  if ($result->num_rows > 0) {
+      /* fetch associative array */
+      echo "<table width=30% border =\'1\'>";
+      echo "<th>Posts</th>";
+      echo "<th>User</th>";
+      echo "<th>Delete?</th>";
+
+      while ($row = $result->fetch_assoc()) {
+          echo '<tr>';
+
+          echo '<td>';
+          echo $row["content"];
+          echo '</td>';
+
+          echo '<td>';
+          echo $row["author_id"];
+          echo '</td>';
+
+          echo '<td>';
+          echo "<input type='checkbox' name='checkboxvar[]' value=" . $row["posts_id"] . ">";
+          echo '</td>';
+
+          echo '</tr>';
+      }
+      echo "</table>";
+
+      /* free result set */
+      $result->free();
+  }
+  ?>
+  <br>
+  <input type="submit" value="Delete Selected Posts">
+
+    </form>
+
+<!-- </select> -->
+
+</body>
+</html>
